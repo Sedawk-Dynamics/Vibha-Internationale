@@ -5,6 +5,8 @@ import "./globals.css"
 import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
 import { WhatsAppButton } from "@/components/whatsapp-button"
+import { ThemeProvider } from "@/components/theme-provider"
+import { TopProgress } from "@/components/top-progress"
 
 export const metadata: Metadata = {
   title: "Vibha Internationale - Premier Industrial Brazing Solutions",
@@ -27,13 +29,21 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
-      <body className={`font-sans antialiased`}>
-        <Navbar />
-        {children}
-        <Footer />
-        <WhatsAppButton />
-        <Analytics />
+    <html lang="en" suppressHydrationWarning>
+      <body className="font-sans antialiased bg-background text-foreground transition-colors duration-300">
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="light"
+          enableSystem
+          disableTransitionOnChange={false}
+        >
+          <TopProgress />
+          <Navbar />
+          <main className="min-h-screen">{children}</main>
+          <Footer />
+          <WhatsAppButton />
+          <Analytics />
+        </ThemeProvider>
       </body>
     </html>
   )

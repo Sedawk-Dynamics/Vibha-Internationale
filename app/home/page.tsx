@@ -1,79 +1,104 @@
 import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import Link from "next/link"
 import Image from "next/image"
-import { CheckCircle2, Award, Users, Sparkles, Shield, Clock, Leaf, ChevronRight } from "lucide-react"
+import { CheckCircle2, ChevronRight } from "lucide-react"
+import { Reveal, RevealStagger, RevealItem } from "@/components/motion/reveal"
+import { RequestQuoteDialog } from "@/components/request-quote-dialog"
+
+const bestSellers = [
+  { title: "SU-TA 200 Brazing Wire", image: "/SU-TA-200.webp", href: "/products/brazing-filler-metals/aluminium-to-aluminium/flux-injected-cored/su-ta-200" },
+  { title: "SKA-TA/TB 200 Brazing Rod", image: "/SKA-TA2040s-1.webp", href: "/products/brazing-filler-metals/aluminium-to-aluminium/flux-mixed-sintered/ska-ta-tb-200" },
+  { title: "0726 Aluminium Flux Powder", image: "/Flux-0726.jpg", href: "/products/brazing-fluxes-paste/torch-flux/0726-powder" },
+  { title: "BCuP-2 Copper Brazing Rod", image: "/Solbraze-BCup-2.webp", href: "/products/brazing-filler-metals/copper-silver-brass/bcup-2" },
+]
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen">
+    <div className="bg-background text-foreground">
       {/* Hero Section */}
       <section className="relative min-h-[600px] flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 z-0 animate-kenburns">
           <Image
             src="/industrial-brazing-process-close-up.jpg"
-            alt="Industrial brazing background"
+            alt=""
             fill
             className="object-cover"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-br from-vibha-purple/60 via-vibha-teal/40 to-vibha-orange/30"></div>
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
         </div>
+        <div className="absolute inset-0 z-[1] bg-linear-to-br from-vibha-purple/60 via-vibha-teal/40 to-vibha-orange/30" />
+        <div className="absolute inset-0 z-[1] bg-linear-to-t from-black/70 via-black/30 to-transparent" />
 
-        <div className="absolute inset-0 z-[1] overflow-hidden pointer-events-none">
-          <div className="absolute top-20 left-10 w-72 h-72 bg-vibha-teal/10 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-20 right-10 w-96 h-96 bg-vibha-orange/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute inset-0 z-[2] overflow-hidden pointer-events-none">
+          <div className="absolute top-20 left-10 w-72 h-72 bg-vibha-teal/15 rounded-full blur-3xl animate-pulse" />
+          <div className="absolute bottom-20 right-10 w-96 h-96 bg-vibha-orange/15 rounded-full blur-3xl animate-pulse [animation-delay:1s]" />
         </div>
 
         <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-5xl mx-auto text-center text-white space-y-8 pt-12">
-            <Badge className="bg-vibha-teal text-white border-0 text-base px-6 py-2 inline-block">
-              Excellence in Industrial Brazing Since 2008
-            </Badge>
-            <h1 className="text-6xl md:text-8xl font-bold leading-[1.1] text-balance tracking-tight">
-              Building Excellence in Industrial Brazing
-            </h1>
-            <p className="text-xl md:text-3xl text-white/95 leading-relaxed max-w-4xl mx-auto text-pretty font-light">
-              Trusted by leading manufacturers worldwide for premium aluminum, copper, and silver brazing solutions
-            </p>
-            <div className="flex flex-col sm:flex-row gap-6 justify-center pt-8">
-              <Button
-                asChild
-                size="lg"
-                className="bg-vibha-orange hover:bg-vibha-orange/90 text-white text-xl px-12 h-16 rounded-full shadow-2xl shadow-vibha-orange/30 hover:scale-105 transition-transform font-semibold"
-              >
-                <Link href="/products/aluminum-brazing">
-                  Explore Our Products
-                  <ChevronRight className="ml-2 h-6 w-6" />
-                </Link>
-              </Button>
-              <Button
-                asChild
-                size="lg"
-                variant="outline"
-                className="bg-white text-gray-900 hover:bg-vibha-teal hover:text-white hover:border-vibha-teal border-2 border-white text-xl px-12 h-16 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-vibha-teal/30 font-semibold"
-              >
-                <Link href="/contact">Request Quote</Link>
-              </Button>
-            </div>
+          <RevealStagger
+            immediate
+            delayChildren={0.15}
+            staggerChildren={0.12}
+            className="max-w-5xl mx-auto text-center text-white space-y-8 pt-12"
+          >
+            <RevealItem>
+              <Badge className="bg-vibha-teal text-white border-0 text-base px-6 py-2 inline-block shadow-lg">
+                Excellence in Industrial Brazing Since 2008
+              </Badge>
+            </RevealItem>
 
-            <div className="flex flex-wrap gap-6 justify-center pt-8 text-sm">
-              <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full border border-white/20">
-                <CheckCircle2 className="h-5 w-5 text-vibha-teal" />
-                <span>ISO Certified</span>
+            <RevealItem>
+              <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold leading-[1.05] text-balance tracking-tight drop-shadow-[0_2px_18px_rgba(0,0,0,0.4)]">
+                Building Excellence in Industrial Brazing
+              </h1>
+            </RevealItem>
+
+            <RevealItem>
+              <p className="text-xl md:text-2xl text-white/95 leading-relaxed max-w-4xl mx-auto text-pretty font-light">
+                Trusted by leading manufacturers worldwide for premium aluminum, copper, and silver brazing solutions
+              </p>
+            </RevealItem>
+
+            <RevealItem>
+              <div className="flex flex-col sm:flex-row gap-6 justify-center pt-6">
+                <Button
+                  asChild
+                  size="lg"
+                  className="bg-vibha-orange hover:bg-vibha-orange/90 text-white text-lg md:text-xl px-10 md:px-12 h-14 md:h-16 rounded-full shadow-2xl shadow-vibha-orange/30 hover:scale-105 transition-transform font-semibold"
+                >
+                  <Link href="/products">
+                    Explore Our Products
+                    <ChevronRight className="ml-2 h-6 w-6" />
+                  </Link>
+                </Button>
+                <RequestQuoteDialog
+                  trigger={
+                    <Button
+                      size="lg"
+                      className="bg-vibha-orange hover:bg-vibha-orange/90 text-white text-lg md:text-xl px-10 md:px-12 h-14 md:h-16 rounded-full shadow-2xl shadow-vibha-orange/30 hover:scale-105 transition-transform font-semibold"
+                    >
+                      Request Quote
+                    </Button>
+                  }
+                />
               </div>
-              <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full border border-white/20">
-                <CheckCircle2 className="h-5 w-5 text-vibha-teal" />
-                <span>Export Ready</span>
+            </RevealItem>
+
+            <RevealItem>
+              <div className="flex flex-wrap gap-4 justify-center pt-6 text-sm">
+                {["ISO Certified", "Export Ready", "250+ Happy Clients"].map((label) => (
+                  <div
+                    key={label}
+                    className="flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full border border-white/20"
+                  >
+                    <CheckCircle2 className="h-5 w-5 text-vibha-teal" />
+                    <span>{label}</span>
+                  </div>
+                ))}
               </div>
-              <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full border border-white/20">
-                <CheckCircle2 className="h-5 w-5 text-vibha-teal" />
-                <span>250+ Happy Clients</span>
-              </div>
-            </div>
-          </div>
+            </RevealItem>
+          </RevealStagger>
         </div>
 
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce z-10">
@@ -83,259 +108,160 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Features Section */}
-      {/* <section className="py-20">
-        <div className="container mx-auto px-4">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-balance text-foreground">
-              Why Choose Vibha International
-            </h2>
-            <p className="text-lg text-foreground/70 text-pretty">
-              16+ years of excellence delivering superior brazing solutions trusted by India's leading manufacturers
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <Card className="border-2 hover:border-vibha-teal transition-all duration-300 hover:shadow-lg group">
-              <CardContent className="p-6 space-y-4">
-                <div className="w-12 h-12 rounded-lg bg-vibha-teal/10 flex items-center justify-center group-hover:bg-vibha-teal/20 transition-colors">
-                  <Users className="h-6 w-6 text-vibha-teal" />
-                </div>
-                <h3 className="text-xl font-semibold text-foreground">Dedicated Support</h3>
-                <p className="text-foreground/70 leading-relaxed">
-                  24/7 customer support with expert technical guidance. Our dedicated team ensures zero downtime and rapid response to all inquiries.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="border-2 hover:border-vibha-orange transition-all duration-300 hover:shadow-lg group">
-              <CardContent className="p-6 space-y-4">
-                <div className="w-12 h-12 rounded-lg bg-vibha-orange/10 flex items-center justify-center group-hover:bg-vibha-orange/20 transition-colors">
-                  <Award className="h-6 w-6 text-vibha-orange" />
-                </div>
-                <h3 className="text-xl font-semibold text-foreground">Global Expertise</h3>
-                <p className="text-foreground/70 leading-relaxed">
-                  Trusted by 250+ clients worldwide across automotive, refrigeration, defense, and aerospace sectors with proven excellence.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="border-2 hover:border-vibha-green transition-all duration-300 hover:shadow-lg group">
-              <CardContent className="p-6 space-y-4">
-                <div className="w-12 h-12 rounded-lg bg-vibha-green/10 flex items-center justify-center group-hover:bg-vibha-green/20 transition-colors">
-                  <Leaf className="h-6 w-6 text-vibha-green" />
-                </div>
-                <h3 className="text-xl font-semibold text-foreground">Eco-Conscious Solutions</h3>
-                <p className="text-foreground/70 leading-relaxed">
-                  Sustainable, lead-free brazing materials compliant with global environmental standards while maintaining superior performance.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="border-2 hover:border-vibha-purple transition-all duration-300 hover:shadow-lg group">
-              <CardContent className="p-6 space-y-4">
-                <div className="w-12 h-12 rounded-lg bg-vibha-purple/10 flex items-center justify-center group-hover:bg-vibha-purple/20 transition-colors">
-                  <Clock className="h-6 w-6 text-vibha-purple" />
-                </div>
-                <h3 className="text-xl font-semibold text-foreground">Reliable Logistics</h3>
-                <p className="text-foreground/70 leading-relaxed">
-                  On-time delivery with international shipping capabilities. We ensure your production schedules are never compromised.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="border-2 hover:border-vibha-teal transition-all duration-300 hover:shadow-lg group">
-              <CardContent className="p-6 space-y-4">
-                <div className="w-12 h-12 rounded-lg bg-vibha-teal/10 flex items-center justify-center group-hover:bg-vibha-teal/20 transition-colors">
-                  <Sparkles className="h-6 w-6 text-vibha-teal" />
-                </div>
-                <h3 className="text-xl font-semibold text-foreground">Advanced Technology</h3>
-                <p className="text-foreground/70 leading-relaxed">
-                  Patented brazing technologies with superior joint strength and reduced maintenance costs for your operations.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="border-2 hover:border-vibha-orange transition-all duration-300 hover:shadow-lg group">
-              <CardContent className="p-6 space-y-4">
-                <div className="w-12 h-12 rounded-lg bg-vibha-orange/10 flex items-center justify-center group-hover:bg-vibha-orange/20 transition-colors">
-                  <Shield className="h-6 w-6 text-vibha-orange" />
-                </div>
-                <h3 className="text-xl font-semibold text-foreground">Certified Excellence</h3>
-                <p className="text-foreground/70 leading-relaxed">
-                  ISO certified products meeting international quality standards. Approved for critical applications in automotive and aerospace.
-                </p>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section> */}
-
       {/* About Section */}
       <section className="py-20 bg-muted/30">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6">
-              <Badge className="bg-vibha-teal text-white">About Us</Badge>
-              <h2 className="text-4xl md:text-5xl font-bold leading-tight text-balance text-foreground">
-                Committed to Superior Quality & Results
-              </h2>
-            <p className="text-lg text-foreground/70 leading-relaxed text-pretty">
-              Vibha Internationale has been established with the primary aim of delivering industrial brazing equipment
-              sourced from the top market leaders who believe in delivering top-class quality products at the best price.
-            </p>
-            <p className="text-lg text-foreground/70 leading-relaxed text-pretty">
-              Our ultimate aim is to give optimum satisfaction to our clients in addition to developing trustworthy,
-              long-standing relationships. We provide one-stop access to all brazing requirements in aluminum, copper
-              & silver brazing filler metals and their fluxes, along with all types of industrial cleaning chemicals.
-            </p>
-              <div className="flex flex-wrap gap-4 pt-4">
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="h-5 w-5 text-vibha-green" />
-                  <span className="text-sm font-medium text-foreground">ISO Certified</span>
+            <Reveal>
+              <div className="space-y-6">
+                <Badge className="bg-vibha-teal text-white">About Us</Badge>
+                <h2 className="text-4xl md:text-5xl font-bold leading-tight text-balance text-foreground">
+                  Committed to Superior Quality &amp; Results
+                </h2>
+                <p className="text-lg text-muted-foreground leading-relaxed text-pretty">
+                  Vibha Internationale has been established with the primary aim of delivering industrial brazing equipment
+                  sourced from the top market leaders who believe in delivering top-class quality products at the best price.
+                </p>
+                <p className="text-lg text-muted-foreground leading-relaxed text-pretty">
+                  Our ultimate aim is to give optimum satisfaction to our clients in addition to developing trustworthy,
+                  long-standing relationships. We provide one-stop access to all brazing requirements in aluminum, copper
+                  &amp; silver brazing filler metals and their fluxes.
+                </p>
+                <div className="flex flex-wrap gap-4 pt-4">
+                  {["ISO Certified", "Export Ready", "Patented Technology"].map((label) => (
+                    <div key={label} className="flex items-center gap-2">
+                      <CheckCircle2 className="h-5 w-5 text-vibha-green" />
+                      <span className="text-sm font-medium text-foreground">{label}</span>
+                    </div>
+                  ))}
                 </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="h-5 w-5 text-vibha-green" />
-                  <span className="text-sm font-medium text-foreground">Export Ready</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="h-5 w-5 text-vibha-green" />
-                  <span className="text-sm font-medium text-foreground">Patented Technology</span>
-                </div>
+                <Button asChild size="lg" className="bg-vibha-teal hover:bg-vibha-teal/90 text-white hover:scale-105 transition-transform">
+                  <Link href="/about">
+                    Learn More About Us
+                    <ChevronRight className="ml-2 h-5 w-5" />
+                  </Link>
+                </Button>
               </div>
-              <Button asChild size="lg" className="bg-vibha-teal hover:bg-vibha-teal/90 text-white">
-                <Link href="/about">
-                  Learn More About Us
-                  <ChevronRight className="ml-2 h-5 w-5" />
-                </Link>
-              </Button>
-            </div>
-            <div className="relative h-[500px] rounded-2xl overflow-hidden">
-              <Image
-                src="https://www.btglabs.com/hubfs/Images/Blog/metal-brazing-copper-component%20%28reduced%29.jpg"
-                alt="Vibha International facility"
-                fill
-                className="object-cover"
-              />
-            </div>
+            </Reveal>
+
+            <Reveal delay={0.15}>
+              <div className="relative h-125 rounded-2xl overflow-hidden shadow-2xl group">
+                <Image
+                  src="/industrial-manufacturing-facility-modern.jpg"
+                  alt="Vibha International facility"
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-700"
+                />
+                <div className="absolute inset-0 bg-linear-to-t from-black/40 via-transparent to-transparent" />
+              </div>
+            </Reveal>
           </div>
         </div>
       </section>
 
       {/* Products Section */}
-       <section>
-  <div className="container mx-auto px-4">
-    <div className="text-center max-w-3xl mx-auto mb-4"> {/* reduced mb-16 → mb-4 */}
-      <h2 className="text-4xl md:text-5xl font-bold mb-2 text-balance text-foreground">
-        Best Selling Products
-      </h2>
-      <p className="text-lg text-foreground/70 text-pretty">
-        Comprehensive range of high-quality brazing materials and chemicals
-      </p>
-    </div>
+      <section className="py-20">
+        <div className="container mx-auto px-4">
+          <Reveal>
+            <div className="text-center max-w-3xl mx-auto mb-12">
+              <h2 className="text-4xl md:text-5xl font-bold mb-3 text-balance text-foreground">
+                Best Selling Products
+              </h2>
+              <p className="text-lg text-muted-foreground text-pretty">
+                Comprehensive range of high-quality brazing materials and chemicals
+              </p>
+            </div>
+          </Reveal>
 
-    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-      {[
-        {
-          title: "Aluminum Brazing Wires",
-          image: "/SU-TA-200.webp",
-          href: "/products/aluminum-brazing",
-        },
-        {
-          title: "Aluminum Brazing Rods",
-          image: "/SKA-TA2040s-1.webp",
-          href: "/products/aluminum-brazing",
-        },
-        {
-          title: "Aluminum Flux Powder",
-          image: "/Flux-0726.jpg",
-          href: "/products/brazing-flux",
-        },
-        {
-          title: "Copper Brazing Rods",
-          image: "/Solbraze-BCup-2.webp",
-          href: "/products/copper-brazing",
-        },
-      ].map((product, index) => (
-        <div
-          key={index}
-          className="group overflow-hidden border-2 border-gray-200 rounded-xl shadow-sm hover:border-vibha-teal hover:shadow-xl transition-all duration-300 flex flex-col bg-card"
-        >
-          <div className="relative h-40 overflow-hidden flex-shrink-0">
-            <Image
-              src={product.image || "/placeholder.svg"}
-              alt={product.title}
-              fill
-              className="object-cover group-hover:scale-110 transition-transform duration-300"
-            />
-          </div>
-          <div className="flex flex-col gap-4 p-6 flex-1">
-            <h3 className="text-xl font-semibold text-foreground">{product.title}</h3>
-            <Button
-              asChild
-              variant="outline"
-              className="w-full group-hover:bg-vibha-teal group-hover:text-white group-hover:border-vibha-teal transition-all duration-300 bg-transparent mt-auto"
-            >
-              <Link href={product.href}>
-                View Details
-                <ChevronRight className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
-          </div>
+          <RevealStagger
+            staggerChildren={0.1}
+            className="grid md:grid-cols-2 lg:grid-cols-4 gap-6"
+          >
+            {bestSellers.map((product) => (
+              <RevealItem key={product.title}>
+                <div className="group overflow-hidden rounded-xl border-2 border-border bg-card shadow-sm hover:border-vibha-teal hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col h-full">
+                  <div className="relative h-44 overflow-hidden shrink-0 bg-muted">
+                    <Image
+                      src={product.image}
+                      alt={product.title}
+                      fill
+                      className="object-cover group-hover:scale-110 transition-transform duration-500"
+                    />
+                  </div>
+                  <div className="flex flex-col gap-4 p-6 flex-1">
+                    <h3 className="text-lg font-semibold text-foreground">{product.title}</h3>
+                    <Button
+                      asChild
+                      variant="outline"
+                      className="w-full group-hover:bg-vibha-teal group-hover:text-white group-hover:border-vibha-teal transition-all duration-300 bg-transparent mt-auto"
+                    >
+                      <Link href={product.href}>
+                        View Details
+                        <ChevronRight className="ml-2 h-4 w-4" />
+                      </Link>
+                    </Button>
+                  </div>
+                </div>
+              </RevealItem>
+            ))}
+          </RevealStagger>
+
+          <Reveal>
+            <div className="text-center mt-12 flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <Button
+                asChild
+                size="lg"
+                className="bg-vibha-orange hover:bg-vibha-orange/90 text-white text-base px-10 h-14 rounded-full shadow-lg shadow-vibha-orange/30 hover:scale-105 transition-transform font-semibold"
+              >
+                <a href="https://staging.vibha.sedawk.cloud/" target="_blank" rel="noopener noreferrer">
+                  Shop Now
+                  <ChevronRight className="ml-2 h-5 w-5" />
+                </a>
+              </Button>
+              <Button
+                asChild
+                size="lg"
+                variant="outline"
+                className="border-2 border-vibha-orange text-vibha-orange bg-transparent hover:bg-vibha-orange hover:text-white text-base px-10 h-14 rounded-full transition-all duration-300 hover:scale-105 font-semibold"
+              >
+                <Link href="/products">
+                  View All Products
+                  <ChevronRight className="ml-2 h-5 w-5" />
+                </Link>
+              </Button>
+            </div>
+          </Reveal>
         </div>
-      ))}
-    </div>
-
-    <div className="text-center mt-12 flex flex-col sm:flex-row gap-4 justify-center items-center">
-      <Button
-        asChild
-        size="lg"
-        className="bg-vibha-teal hover:bg-vibha-teal/90 text-white px-8 h-12"
-      >
-        <a href="https://staging.vibha.sedawk.cloud/" target="_blank" rel="noopener noreferrer">
-          Shop Now
-          <ChevronRight className="ml-2 h-5 w-5" />
-        </a>
-      </Button>
-      <Button
-        asChild
-        size="lg"
-        variant="outline"
-        className="border-2 bg-transparent hover:bg-vibha-teal hover:text-white hover:border-vibha-teal transition-all duration-300"
-      >
-        <Link href="/products/aluminum-brazing">
-          View All Products
-          <ChevronRight className="ml-2 h-5 w-5" />
-        </Link>
-      </Button>
-    </div>
-  </div>
-</section>
+      </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-vibha-teal text-white">
-        <div className="container mx-auto px-4">
+      <section className="py-20 bg-linear-to-r from-vibha-teal via-vibha-purple to-vibha-teal text-white relative overflow-hidden">
+        <div className="absolute inset-0 opacity-20 pointer-events-none">
+          <div className="absolute -top-10 -left-10 w-72 h-72 bg-white/10 rounded-full blur-3xl animate-pulse" />
+          <div className="absolute -bottom-10 -right-10 w-96 h-96 bg-white/10 rounded-full blur-3xl animate-pulse [animation-delay:1.5s]" />
+        </div>
+        <Reveal className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center space-y-6">
             <h2 className="text-4xl md:text-5xl font-bold text-balance text-white">Request a Quote Today</h2>
             <p className="text-xl text-white/95 leading-relaxed text-pretty">
               Do you have questions about our products? We are here to help your company. Send us an email or call us,
-              and we'll get in touch shortly.
+              and we&apos;ll get in touch shortly.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-              <Button asChild size="lg" className="bg-white text-vibha-teal hover:bg-white/90 text-lg px-8 h-14">
+              <Button asChild size="lg" className="bg-white text-vibha-teal hover:bg-white/90 text-lg px-8 h-14 hover:scale-105 transition-transform">
                 <Link href="/contact">Contact Us Now</Link>
               </Button>
               <Button
                 asChild
                 size="lg"
                 variant="outline"
-                className="border-2 border-white text-white hover:bg-white hover:text-vibha-teal text-lg px-8 h-14 bg-transparent transition-all duration-300"
+                className="border-2 border-white text-white hover:bg-white hover:text-vibha-teal text-lg px-8 h-14 bg-transparent transition-all duration-300 hover:scale-105"
               >
                 <Link href="tel:+918007770827">Call: +91 800 777 0827</Link>
               </Button>
             </div>
           </div>
-        </div>
+        </Reveal>
       </section>
     </div>
   )

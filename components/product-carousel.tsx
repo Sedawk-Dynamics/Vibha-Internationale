@@ -40,20 +40,20 @@ export function ProductCarousel({ images, alt }: ProductCarouselProps) {
   }
 
   return (
-    <div className="relative h-80 rounded-lg overflow-hidden shadow-lg bg-gray-100">
+    <div className="group relative h-80 rounded-lg overflow-hidden shadow-lg bg-muted">
       {/* Main Image */}
       <Image
         src={images[currentIndex]}
         alt={`${alt} - Image ${currentIndex + 1}`}
         fill
-        className="object-contain"
+        className="object-contain transition-transform duration-700 ease-out group-hover:scale-125"
         priority
       />
 
       {/* Previous Button */}
       <button
         onClick={goToPrevious}
-        className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white text-gray-900 rounded-full p-2 transition-all z-10"
+        className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-card/90 hover:bg-card text-foreground rounded-full p-2 transition-all z-10"
         aria-label="Previous image"
       >
         <ChevronLeft className="h-5 w-5" />
@@ -62,7 +62,7 @@ export function ProductCarousel({ images, alt }: ProductCarouselProps) {
       {/* Next Button */}
       <button
         onClick={goToNext}
-        className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white text-gray-900 rounded-full p-2 transition-all z-10"
+        className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-card/90 hover:bg-card text-foreground rounded-full p-2 transition-all z-10"
         aria-label="Next image"
       >
         <ChevronRight className="h-5 w-5" />
@@ -78,7 +78,7 @@ export function ProductCarousel({ images, alt }: ProductCarouselProps) {
               className={`w-2 h-2 rounded-full transition-all ${
                 index === currentIndex
                   ? 'bg-vibha-teal w-8'
-                  : 'bg-white/60 hover:bg-white'
+                  : 'bg-foreground/30 hover:bg-foreground/60'
               }`}
               aria-label={`Go to image ${index + 1}`}
             />
